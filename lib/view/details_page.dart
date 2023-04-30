@@ -1,9 +1,12 @@
 import 'package:class_bookui_app/constant/constant_widgets.dart';
 import 'package:class_bookui_app/model/book_data.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 class DetailsPage extends StatelessWidget {
-  const DetailsPage({super.key});
+  final Book book;
+
+  DetailsPage({required this.book});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class DetailsPage extends StatelessWidget {
                   color: Colors.blue,
                   image: DecorationImage(
                     image: NetworkImage(
-                      booksList[0].imgUrl,
+                      book.imgUrl,
                     ),
                     fit: BoxFit.fill,
                   ),
@@ -27,7 +30,8 @@ class DetailsPage extends StatelessWidget {
               ),
               IconButton(
                 onPressed: () {
-                  Navigator.of(context).pop();
+                  // Navigator.of(context).pop();
+                  Get.back();
                 },
                 icon: const Icon(
                   Icons.arrow_back,
@@ -49,7 +53,7 @@ class DetailsPage extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
                   Text(
-                    booksList[0].title,
+                    book.title,
                     style: const TextStyle(
                       fontSize: 22.0,
                       fontWeight: FontWeight.w500,
@@ -58,9 +62,9 @@ class DetailsPage extends StatelessWidget {
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(booksList[0].rating),
+                      Text(book.rating),
                       Text(
-                        booksList[0].gernal,
+                        book.gernal,
                         style: const TextStyle(
                           color: Colors.blue,
                           fontSize: 18.0,
@@ -81,7 +85,7 @@ class DetailsPage extends StatelessWidget {
               width: double.infinity,
               height: MediaQuery.of(context).size.height * 0.3,
               child: Text(
-                booksList[0].discription,
+                book.discription,
                 style: const TextStyle(
                   fontSize: 18.0,
                 ),

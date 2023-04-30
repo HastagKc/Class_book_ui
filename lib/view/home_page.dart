@@ -1,5 +1,7 @@
+import 'package:class_bookui_app/view/details_page.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:get/get.dart';
 
 import '../constant/constant_widgets.dart';
 import '../model/book_data.dart';
@@ -97,52 +99,61 @@ class HomePage extends StatelessWidget {
               // color: Colors.black,
               child: ListView.builder(
                 scrollDirection: Axis.horizontal,
-                itemCount: 5,
+                itemCount: booksList.length,
                 itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    width: 350,
-                    child: Row(
-                      children: [
-                        Expanded(
-                          flex: 4,
-                          child: Image(
-                            image: NetworkImage(
-                              booksList[index].imgUrl,
+                  return InkWell(
+                    onTap: () {
+                      Get.to(
+                        () => DetailsPage(
+                          book: booksList[index],
+                        ),
+                      );
+                    },
+                    child: Container(
+                      width: 350,
+                      child: Row(
+                        children: [
+                          Expanded(
+                            flex: 4,
+                            child: Image(
+                              image: NetworkImage(
+                                booksList[index].imgUrl,
+                              ),
+                              fit: BoxFit.fill,
                             ),
-                            fit: BoxFit.fill,
                           ),
-                        ),
-                        widgetGap,
-                        Expanded(
-                          flex: 6,
-                          child: Column(
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                            children: [
-                              Text(
-                                booksList[index].title,
-                                style: const TextStyle(
-                                  color: Colors.black,
-                                  fontWeight: FontWeight.bold,
+                          widgetGap,
+                          Expanded(
+                            flex: 6,
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+                              children: [
+                                Text(
+                                  booksList[index].title,
+                                  style: const TextStyle(
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.bold,
+                                  ),
                                 ),
-                              ),
-                              Text(
-                                booksList[index].discription,
-                                textAlign: TextAlign.justify,
-                              ),
-                              Row(
-                                mainAxisAlignment:
-                                    MainAxisAlignment.spaceBetween,
-                                children: [
-                                  Text(booksList[index].rating),
-                                  Text(booksList[index].gernal),
-                                ],
-                              ),
-                            ],
+                                Text(
+                                  booksList[index].discription,
+                                  textAlign: TextAlign.justify,
+                                ),
+                                Row(
+                                  mainAxisAlignment:
+                                      MainAxisAlignment.spaceBetween,
+                                  children: [
+                                    Text(booksList[index].rating),
+                                    Text(booksList[index].gernal),
+                                  ],
+                                ),
+                              ],
+                            ),
                           ),
-                        ),
-                        widgetGap,
-                      ],
+                          widgetGap,
+                        ],
+                      ),
                     ),
                   );
                 },
