@@ -52,11 +52,13 @@ class DetailsPage extends StatelessWidget {
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: [
-                  Text(
-                    book.title,
-                    style: const TextStyle(
-                      fontSize: 22.0,
-                      fontWeight: FontWeight.w500,
+                  Expanded(
+                    child: Text(
+                      book.title,
+                      style: const TextStyle(
+                        fontSize: 20.0,
+                        fontWeight: FontWeight.w500,
+                      ),
                     ),
                   ),
                   Column(
@@ -78,6 +80,7 @@ class DetailsPage extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.only(
+              top: 20.0,
               left: 10.0,
               right: 10.0,
             ),
@@ -103,13 +106,16 @@ class DetailsPage extends StatelessWidget {
                 ),
                 child: ElevatedButton(
                   style: ElevatedButton.styleFrom(
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     minimumSize: const Size(
                       150,
                       50,
                     ),
                   ),
                   onPressed: () {},
-                  child: Text('Read Book'),
+                  child: const Text('Read Book'),
                 ),
               ),
               Padding(
@@ -117,9 +123,12 @@ class DetailsPage extends StatelessWidget {
                   left: 10.0,
                   right: 10.0,
                 ),
-                child: ElevatedButton(
-                  style: ElevatedButton.styleFrom(
+                child: OutlinedButton(
+                  style: OutlinedButton.styleFrom(
                     minimumSize: const Size(150, 50),
+                    shape: RoundedRectangleBorder(
+                      borderRadius: BorderRadius.circular(10.0),
+                    ),
                     backgroundColor: Colors.white,
                   ),
                   onPressed: () {},

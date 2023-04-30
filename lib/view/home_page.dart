@@ -93,72 +93,7 @@ class HomePage extends StatelessWidget {
             ),
 
             //! creating booklist ui
-            Container(
-              height: 220,
-              width: double.infinity,
-              // color: Colors.black,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                itemCount: booksList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return InkWell(
-                    onTap: () {
-                      Get.to(
-                        () => DetailsPage(
-                          book: booksList[index],
-                        ),
-                      );
-                    },
-                    child: Container(
-                      width: 350,
-                      child: Row(
-                        children: [
-                          Expanded(
-                            flex: 4,
-                            child: Image(
-                              image: NetworkImage(
-                                booksList[index].imgUrl,
-                              ),
-                              fit: BoxFit.fill,
-                            ),
-                          ),
-                          widgetGap,
-                          Expanded(
-                            flex: 6,
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-                              children: [
-                                Text(
-                                  booksList[index].title,
-                                  style: const TextStyle(
-                                    color: Colors.black,
-                                    fontWeight: FontWeight.bold,
-                                  ),
-                                ),
-                                Text(
-                                  booksList[index].discription,
-                                  textAlign: TextAlign.justify,
-                                ),
-                                Row(
-                                  mainAxisAlignment:
-                                      MainAxisAlignment.spaceBetween,
-                                  children: [
-                                    Text(booksList[index].rating),
-                                    Text(booksList[index].gernal),
-                                  ],
-                                ),
-                              ],
-                            ),
-                          ),
-                          widgetGap,
-                        ],
-                      ),
-                    ),
-                  );
-                },
-              ),
-            ),
+            const BookListUi(),
 
             //! creating Text
             heightGap,
@@ -177,75 +112,210 @@ class HomePage extends StatelessWidget {
             ),
 
             //! creating related books
-            Container(
-              width: 200,
-              height: 270,
-              // color: Colors.blue,
-              child: ListView.builder(
-                scrollDirection: Axis.horizontal,
-                reverse: true,
-                itemCount: booksList.length,
-                itemBuilder: (BuildContext context, int index) {
-                  return Container(
-                    width: 150,
-                    height: 200,
-                    // color: Colors.red,
-                    margin: const EdgeInsets.only(left: 10.0),
-                    child: Column(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: [
-                        Expanded(
-                          flex: 8,
-                          child: Padding(
-                            padding: const EdgeInsets.all(5.0),
-                            child: Container(
-                              width: 150,
-                              height: 200,
-                              child: Image(
-                                image: NetworkImage(
-                                  booksList[index].imgUrl,
-                                ),
-                                fit: BoxFit.cover,
-                              ),
-                            ),
-                          ),
-                        ),
-                        Padding(
-                          padding: const EdgeInsets.all(5.0),
-                          child: Expanded(
-                            flex: 2,
+            const RelatedBookUi(),
+          ],
+        ),
+      ),
+    );
+  }
+}
+
+class BookListUi extends StatelessWidget {
+  const BookListUi({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      height: 240,
+      width: double.infinity,
+      // color: Colors.black,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        itemCount: booksList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              Get.to(
+                () => DetailsPage(
+                  book: booksList[index],
+                ),
+              );
+            },
+            child: Container(
+              width: 340,
+              // color: Colors.red,
+              child: Stack(
+                alignment: Alignment.bottomCenter,
+                children: [
+                  Card(
+                    elevation: 5,
+                    child: Container(
+                      height: 200,
+                      width: 340,
+                      padding: const EdgeInsets.all(10.0),
+                      // color: Colors.green,
+                      child: Row(
+                        children: [
+                          Spacer(),
+                          Expanded(
+                            flex: 1,
                             child: Column(
                               crossAxisAlignment: CrossAxisAlignment.start,
                               children: [
                                 Container(
-                                  width: 100,
-                                  child: Text(
-                                    booksList[index].title,
-                                    overflow: TextOverflow.ellipsis,
-                                    style: const TextStyle(
-                                      color: Colors.black,
-                                    ),
-                                  ),
-                                ),
-                                Text(
-                                  booksList[index].gernal,
-                                  maxLines: 1,
-                                  style: const TextStyle(
-                                    color: Colors.blue,
+                                  height: 180,
+                                  // width: 320,
+                                  // color: Colors.yellow,
+                                  child: Column(
+                                    mainAxisAlignment:
+                                        MainAxisAlignment.spaceBetween,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text(
+                                        booksList[index].title,
+                                        style: const TextStyle(
+                                          fontSize: 16.0,
+                                          fontWeight: FontWeight.bold,
+                                        ),
+                                      ),
+                                      Text(
+                                        booksList[index].discription,
+                                        maxLines: 4,
+                                        textAlign: TextAlign.justify,
+                                      ),
+                                      Row(
+                                        children: [
+                                          Text(
+                                            booksList[index].rating,
+                                          ),
+                                          Container(
+                                            width: 60,
+                                            child: TextButton(
+                                              onPressed: () {},
+                                              child: Text(
+                                                booksList[index].gernal,
+                                                overflow: TextOverflow.ellipsis,
+                                              ),
+                                            ),
+                                          ),
+                                        ],
+                                      ),
+                                    ],
                                   ),
                                 ),
                               ],
                             ),
                           ),
-                        ),
-                      ],
+                        ],
+                      ),
                     ),
-                  );
-                },
+                  ),
+                  Positioned(
+                    top: 10,
+                    left: 20,
+                    child: Container(
+                      width: 120,
+                      height: 200,
+                      decoration: BoxDecoration(
+                        image: DecorationImage(
+                          image: NetworkImage(
+                            booksList[index].imgUrl,
+                          ),
+                          fit: BoxFit.fill,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
-          ],
-        ),
+          );
+        },
+      ),
+    );
+  }
+}
+
+class RelatedBookUi extends StatelessWidget {
+  const RelatedBookUi({super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Container(
+      width: 200,
+      height: 270,
+      // color: Colors.blue,
+      child: ListView.builder(
+        scrollDirection: Axis.horizontal,
+        reverse: true,
+        itemCount: booksList.length,
+        itemBuilder: (BuildContext context, int index) {
+          return InkWell(
+            onTap: () {
+              Get.to(
+                DetailsPage(
+                  book: booksList[index],
+                ),
+              );
+            },
+            child: Container(
+              width: 150,
+              height: 200,
+              // color: Colors.red,
+              margin: const EdgeInsets.only(left: 10.0),
+              child: Column(
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: [
+                  Expanded(
+                    flex: 8,
+                    child: Padding(
+                      padding: const EdgeInsets.all(5.0),
+                      child: Container(
+                        width: 150,
+                        height: 200,
+                        child: Image(
+                          image: NetworkImage(
+                            booksList[index].imgUrl,
+                          ),
+                          fit: BoxFit.cover,
+                        ),
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: const EdgeInsets.all(5.0),
+                    child: Expanded(
+                      flex: 2,
+                      child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: [
+                          Container(
+                            width: 100,
+                            child: Text(
+                              booksList[index].title,
+                              overflow: TextOverflow.ellipsis,
+                              style: const TextStyle(
+                                color: Colors.black,
+                              ),
+                            ),
+                          ),
+                          Text(
+                            booksList[index].gernal,
+                            maxLines: 1,
+                            style: const TextStyle(
+                              color: Colors.blue,
+                            ),
+                          ),
+                        ],
+                      ),
+                    ),
+                  ),
+                ],
+              ),
+            ),
+          );
+        },
       ),
     );
   }
