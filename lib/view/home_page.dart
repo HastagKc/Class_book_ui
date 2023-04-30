@@ -53,6 +53,7 @@ class HomePage extends StatelessWidget {
       body: Container(
         padding: const EdgeInsets.only(left: 15.0, right: 15.0),
         child: ListView(
+          physics: const BouncingScrollPhysics(),
           children: [
             heightGap,
             //!banner image
@@ -139,6 +140,7 @@ class BookListUi extends StatelessWidget {
                 () => DetailsPage(
                   book: booksList[index],
                 ),
+                transition: Transition.zoom,
               );
             },
             child: Container(
@@ -257,6 +259,7 @@ class RelatedBookUi extends StatelessWidget {
                 DetailsPage(
                   book: booksList[index],
                 ),
+                transition: Transition.rightToLeft,
               );
             },
             child: Container(
